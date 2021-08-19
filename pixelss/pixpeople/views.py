@@ -2,23 +2,53 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 # Create your views here.
 
-menu = ["About", "Sign up", "Sign in"]
+menu = [
+        {'title': 'Main page', 'url_name': 'home'},
+        {'title': "About site", 'url_name': 'about'},
+        {'title': "Profile", 'url_name': 'profile'},
+        {'title': "Sign up", 'url_name': 'registration'},
+        {'title': "Sign in", 'url_name': 'authorization'}
+        ]
 
 
 def index(request):
-    return render(request, 'pixpeople/index.html/', {'menu': menu, 'tittle': 'Главная страница'})
+    context = {
+        'menu': menu,
+        'title': 'Главная страница'
+    }
+    return render(request, 'pixpeople/index.html/', context=context)
 
 
 def authorization(request):
-    return render(request, 'pixpeople/authorization.html/', {'menu': menu, 'tittle': 'Авторизация'})
+    context = {
+        'menu': menu,
+        'title': 'Авторизация'
+    }
+    return render(request, 'pixpeople/authorization.html/', context=context)
 
 
 def registration(request):
-    return render(request, 'pixpeople/registration.html/', {'menu': menu, 'tittle': 'Регистрация'})
+    context = {
+        'menu': menu,
+        'title': 'Регистрация'
+    }
+    return render(request, 'pixpeople/registration.html/', context=context)
 
 
-def profile(request, profid):
-    return HttpResponse('Тут будет профиль')
+def about(request):
+    context = {
+        'menu': menu,
+        'title': 'О сайте'
+    }
+    return render(request, 'pixpeople/about.html/', context=context)
+
+
+def profile(request):
+    context = {
+        'menu': menu,
+        'title': 'Профиль'
+    }
+    return render(request, 'pixpeople/profile.html/', context=context)
 
 
 def pageNotFound(request, exception):
